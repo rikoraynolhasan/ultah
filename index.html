@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Selamat Ulang Tahun, Junia!</title>
+  <style>
+    /* Google Font */
+    @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&display=swap');
+
+    body {
+      margin: 0;
+      font-family: 'Quicksand', sans-serif;
+      background: url('img/birthday.avif') center/cover no-repeat, linear-gradient(135deg, #fff0f5, #ffe6f0);
+      background-blend-mode: soft-light;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      min-height: 100vh;
+      overflow-x: hidden;
+      padding: 2rem 1rem;
+    }
+
+    h1 {
+      color: #b4004e;
+      font-size: 3rem;
+      margin-top: 1rem;
+      text-shadow: 1px 1px #fff;
+      animation: float 3s ease-in-out infinite;
+    }
+
+    .frame {
+      width: 300px;
+      height: 370px;
+      border: 10px solid #f7d1dc;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+      border-radius: 20px;
+      background-color: white;
+      overflow: hidden;
+      position: relative;
+      margin-top: 2rem;
+      animation: fadeInScale 1s ease-in-out;
+    }
+
+    .frame img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .photo-caption {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      background: #f8bbd0;
+      color: #880e4f;
+      font-weight: bold;
+      text-align: center;
+      padding: 10px;
+    }
+
+    button {
+      margin-top: 2rem;
+      padding: 14px 30px;
+      font-size: 1.1rem;
+      background-color: #d81b60;
+      color: white;
+      border: none;
+      border-radius: 15px;
+      cursor: pointer;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+      transition: transform 0.3s ease, background 0.3s ease;
+      animation: fadeInUp 1s ease-in-out;
+    }
+
+    button:hover {
+      background-color: #880e4f;
+      transform: scale(1.05);
+    }
+
+    .message {
+      display: none;
+      font-size: 1.15rem;
+      color: #444;
+      background-color: #ffffffde;
+      border-radius: 20px;
+      padding: 1.5rem 2rem;
+      margin-top: 2rem;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+      animation: fadeIn 1.5s ease forwards;
+      max-width: 420px;
+      text-align: center;
+    }
+
+    /* Animations */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeInScale {
+      from { opacity: 0; transform: scale(0.8); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    /* Confetti */
+    .confetti {
+      position: fixed;
+      width: 10px;
+      height: 10px;
+      background-color: #e91e63;
+      z-index: 9999;
+      animation: fall linear infinite;
+    }
+
+    @keyframes fall {
+      0% { transform: translateY(-10px) rotate(0); }
+      100% { transform: translateY(100vh) rotate(360deg); }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Selamat Ulang Tahun, Juniaaa! 🌸</h1>
+
+  <div class="frame">
+    <img src="img/Junia.jpeg" alt="Foto Junia">
+    <div class="photo-caption">Junia yang Cantik ✨</div>
+  </div>
+
+  <button onclick="showMessage()">💝 Buka Ucapan</button>
+
+  <div class="message" id="birthdayMessage">
+    <p>Semoga semakin sukses dan hari-hari mu dipenuhi cerita yang menyenangkan denganku</p>
+    <p>Untuk di usiamu yang sekarang, semoga kamu semakin dewasa, bijaksana, dan selalu dikelilingi oleh orang-orang tersayang. Terima kasih atas semua tawa, canda, dan semua hal yang kita lalui. Semoga semua yang kamu impikan bisa terwujud di tahun ini 💖💖💖💖</p>
+    <p>— From me to Ibu Bidan Cantik hehe 🎁</p>
+  </div>
+
+  <!-- Lagu Ulang Tahun -->
+  <audio id="music" loop controls hidden>
+    <source src="music/hbdsong.mp3" type="audio/mp3">
+    Browser Anda tidak mendukung audio.
+  </audio>
+
+  <script>
+    function showMessage() {
+    document.getElementById('birthdayMessage').style.display = 'block';
+    startConfetti();
+
+        // Mulai musik saat user klik tombol
+        const music = document.getElementById('music');
+        if (music.paused) {
+            music.play().catch(e => {
+                console.log('Autoplay ditolak:', e);
+            });
+        }
+    }
+    function startConfetti() {
+        for (let i = 0; i < 100; i++) {
+            let confetti = document.createElement("div");
+            confetti.classList.add("confetti");
+            confetti.style.left = Math.random() * 100 + "vw";
+            confetti.style.backgroundColor = ["#e91e63", "#f48fb1", "#f06292", "#f8bbd0"][Math.floor(Math.random() * 4)];
+            confetti.style.animationDuration = 2 + Math.random() * 3 + "s";
+            document.body.appendChild(confetti);
+            setTimeout(() => confetti.remove(), 5000);
+            }
+        }
+  </script>
+
+</body>
+</html>
